@@ -1,0 +1,19 @@
+doctype html
+html(class="no-js", lang="en")&attributes(head.htmlAttributes.toComponent())
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible", content="ie=edge")
+    !=head.title.toString()
+    !=head.meta.toString()
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(charset="utf-8")
+    meta(name="fragment", content="!")
+    script.
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js')
+    style#css!= css
+
+  body
+    #app!= body
+    script!=initialState
+    script!=clientConfig
+    script(src=js)
