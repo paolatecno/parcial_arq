@@ -10,7 +10,7 @@ const UsuarioSchema = new mongoose.Schema({
   // grupo:[]
 });
 
-UsuarioSchema.statics.crear = (nombre, apellido, usuario, password, email) => {
+UsuarioSchema.statics.crear = function (nombre, apellido, usuario, password, email = 'me@gmail.com') {
   const parametros = {
     nombre,
     apellido,
@@ -25,6 +25,18 @@ UsuarioSchema.statics.crear = (nombre, apellido, usuario, password, email) => {
         reject(error);
       } else {
         resolve(nuevoUsuario);
+      }
+    });
+  });
+};
+
+UsuarioSchema.statics.getByUsuario = function (username) {
+  return new Promise((resolve, reject) => {
+    this.findOne({ usuario: username }, (error, usuario) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(usuario);
       }
     });
   });
@@ -66,5 +78,5 @@ UsuarioSchema.statics.modificarUsuario = function(usuario){
   })
 }
 
-var Usuario = mongoose.model('Usuario',UsuarioSchema)
-module.exports = Usuario
+const Usuario = mongoose.model('Usuario', UsuarioSchema);
+export default Usuario;

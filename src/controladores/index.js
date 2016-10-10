@@ -11,7 +11,7 @@ import ContextWrapper from 'modulos/ContextWrapper';
 import router from 'modulos/expressUtils';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
 import template from '../vistas/layout.pug';
-
+import usuario from './usuario';
 
 export default () => {
   // conexion a la base de datos
@@ -24,6 +24,8 @@ export default () => {
   });
 
   const app = router();
+
+  app.use('/app/usuarios', usuario());
 
   app.get('*', render);
 
