@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
 import mongoose from 'mongoose';
-import { baseUri } from 'config';
+import { baseUri, routeUri } from 'config';
 import routes from 'rutas';
 import ContextWrapper from 'modulos/ContextWrapper';
 import router from 'modulos/expressUtils';
@@ -25,7 +25,7 @@ export default () => {
 
   const app = router();
 
-  app.use('/app/usuarios', usuario());
+  app.use(path.join(routeUri, '/usuarios'), usuario());
 
   app.get('*', render);
 
